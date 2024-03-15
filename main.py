@@ -1,5 +1,5 @@
-def sort_on(dict, key):
-    return dict[key]
+def sort_on(dict):
+    return dict["letter"]
 
 
 def sort_dict(dict):
@@ -20,14 +20,22 @@ def main():
                 letter_count[lowered_char] += 1
 
         words = file_contents.split()
-        print(f"{file_contents}")
-        print(f"{len(words)}")
 
         print(f"--- Begin report of {book_path} ---")
         print(f"{len(words)} words found in the document\n")
 
+        letters = []
         for key in letter_count:
-            print(f"The '{key}' character was found {letter_count[key]} times")
+            if key.isalpha():
+                letters.append({"letter": key, "count": letter_count[key]})
+
+        letters.sort(reverse=False, key=sort_on)
+
+        for i in range(0, len(letters)):
+            print(f"The '{letters[i]["letter"]}' character was found {
+                  letters[i]["count"]} times")
+
+        print("--- End Report ---")
 
 
 main()
